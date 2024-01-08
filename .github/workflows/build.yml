@@ -1,0 +1,40 @@
+name: Build
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        build-type: ["Debug"]
+
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        submodules: true
+
+    - name: Install latest CMake.
+      uses: lukka/get-cmake@latest
+
+    - name: Run CMake consuming CMakePreset.json
+      uses: lukka/run-cmake@v10
+      with:
+        configurePreset: x64-windows
+        buildPreset: ${{matrix.build-type}}
+
+    - name: Run the executable and ignore the return code
+      shell: bash
+      run: |
+        ${{github.workspace}}/build/bin/${{matrix.build-type}}/test1.exe || true
+    
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v3
+      if: github.event_name == 'workflow_dispatch'
+      with:
+        name: ${{matrix.build-type}}
+        path: |
+          ${{github.workspace}}/build/bin/${{matrix.build-type}}
