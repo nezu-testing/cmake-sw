@@ -26,11 +26,6 @@ jobs:
         configurePreset: x64-windows
         buildPreset: ${{matrix.build-type}}
 
-    - name: Run the executable and ignore the return code
-      shell: bash
-      run: |
-        ${{github.workspace}}/build/bin/${{matrix.build-type}}/test1.exe || true
-    
     - name: Upload build artifacts
       uses: actions/upload-artifact@v3
       if: github.event_name == 'workflow_dispatch'
@@ -38,3 +33,7 @@ jobs:
         name: ${{matrix.build-type}}
         path: |
           ${{github.workspace}}/build/bin/${{matrix.build-type}}
+
+    - name: Run the executable
+      run: |
+        ${{github.workspace}}/build/bin/${{matrix.build-type}}/test1.exe
