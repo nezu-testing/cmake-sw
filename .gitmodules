@@ -1,0 +1,3 @@
+[submodule "steamworks-sdk-cmake"]
+	path = steamworks-sdk-cmake
+	url = https://github.com/dumbasPL/steamworks-sdk-cmake.git

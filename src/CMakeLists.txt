@@ -1,6 +1,12 @@
 
 add_executable(test1 main.cpp)
 
+message(STATUS "Steamworks_INCLUDE_DIR: ${Steamworks_INCLUDE_DIR}")
+message(STATUS "Steamworks_IMPLIB: ${Steamworks_IMPLIB}")
+message(STATUS "Steamworks_REDISTRIBUTABLE: ${Steamworks_REDISTRIBUTABLE}")
+message(STATUS "Steamworks_REDISTRIBUTABLE_DIR: ${Steamworks_REDISTRIBUTABLE_DIR}")
+message(STATUS "Steamworks_FOUND: ${Steamworks_FOUND}")
+
 target_link_libraries(test1 PRIVATE Steamworks)
 target_compile_features(test1 PUBLIC c_std_17 cxx_std_20)
 

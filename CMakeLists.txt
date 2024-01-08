@@ -4,6 +4,6 @@ project(sw-test VERSION 1.0.0)
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
-include(cmake/Steamworks.cmake)
+include(steamworks-sdk-cmake/FindSteamworks.cmake)
 
 add_subdirectory(src)
